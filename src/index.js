@@ -3,30 +3,34 @@ import ReactDom from 'react-dom';
 
 import './index.css';
 
-class ClassExample extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>Hello Class</h1>
-      </div>
-    );
-  }
+
+const arrText = [];
+
+function writeText() {
+  arrText.push("Нормально");
+  ReactDom.render(<Text messages = { arrText }/>, document.getElementById("text"));
 }
 
-/*const Example = () => {
+const Text = (props) => {
+  return props.messages.map(message => <Ptext text = { message }/>);
+};
+
+const App = () => {
   return (
-    <div>
-      <h1>Hello React1</h1>
-      <ClassExample />
-    </div>
+    <main>
+      <button id="btn">Оставить сообщение</button>
+      <div id="text"></div>
+    </main>
   );
 };
-*/
-//const ExampleWithoutJSX = () => React.createElement("h1", { }, "Hello WithoutJSX");
 
-const ExampleWithoutJSX = () => {
-  return React.createElement("div", null, React.createElement('h1', null, "Hello React"), React.createElement(ClassExample, null, null));
+const Ptext = (props) => <p>{props.text}</p>;
+
+
+window.onload = function() {
+  document.getElementById("btn").addEventListener('click', () => writeText() );
 }
 
-ReactDom.render(<ExampleWithoutJSX/>, document.getElementById("root"));
+
+ReactDom.render(<App/>, document.getElementById("root"));
 
