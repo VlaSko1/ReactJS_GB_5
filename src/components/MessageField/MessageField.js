@@ -45,5 +45,4 @@ export class MessageField extends React.Component {
       </div>
     )
   }
-
 }
