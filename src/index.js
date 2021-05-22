@@ -1,36 +1,20 @@
 import React from 'react';
 import ReactDom from 'react-dom';
+import { MessageField } from './components/MessageField/MessageField'
 
-import './index.css';
+import './index.css'
 
 
-const arrText = [];
-
-function writeText() {
-  arrText.push("Нормально");
-  ReactDom.render(<Text messages = { arrText }/>, document.getElementById("text"));
+class App extends React.Component {
+  
+  render() {
+    return (
+      <div className='app__container'> 
+        <MessageField/>
+      </div>
+    )
+  }
 }
-
-const Text = (props) => {
-  return props.messages.map(message => <Ptext text = { message }/>);
-};
-
-const App = () => {
-  return (
-    <main>
-      <button id="btn">Оставить сообщение</button>
-      <div id="text"></div>
-    </main>
-  );
-};
-
-const Ptext = (props) => <p>{props.text}</p>;
-
-
-window.onload = function() {
-  document.getElementById("btn").addEventListener('click', () => writeText() );
-}
-
 
 ReactDom.render(<App/>, document.getElementById("root"));
 

@@ -1,0 +1,11 @@
+.messages__container {
+    width: 70%;
+    height: 80vh;
+    min-height: 500px;
+    min-width: 500px;
+    overflow: auto;
+    margin: 30px auto;
+    padding: 10px;
+    background-color: rgb(148, 156, 152);
+}
+
