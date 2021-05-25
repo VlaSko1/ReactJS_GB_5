@@ -8,10 +8,13 @@ import styles from './message-field.module.css'
 const StyledInput = withStyles((theme) => ({
   root: {
     "&": {
-      color: "#9a9fa1",
+      color: "black",
       padding: '10px 15px',
       fontSize: "15px",
-      
+      height: "5vh"
+
+
+
     }
   }
 }))(Input)
@@ -39,7 +42,7 @@ export class MessageField extends React.Component {
     }
   }
 
-  sendMessage = ({author, value}) => {
+  sendMessage = ({ author, value }) => {
     const { messages } = this.state
 
     this.setState({
@@ -54,11 +57,11 @@ export class MessageField extends React.Component {
     })
   }
 
-  handlePressInput = ({code}) => { 
+  handlePressInput = ({ charCode }) => {
     const { value } = this.state
-    console.log(code)
-    if(code === "Enter") {
-      this.sendMessage({author: "User", value})
+
+    if (charCode === 13) {
+      this.sendMessage({ author: "User", value })
     }
   }
 
@@ -67,21 +70,22 @@ export class MessageField extends React.Component {
     const { messages, value } = this.state;
 
     return (
-      <div>
-      
-        { messages.map((message, index) => (
-          <Message message={message} key={index} />
-        ))}
-
+      <div className={styles.message__field}>
+        <div className={styles.message__list}>
+          {messages.map((message, index) => (
+            <Message message={message} key={index} />
+          ))}
+        </div>
         <StyledInput
           onChange={this.handleChangeInput}
           onKeyPress={this.handlePressInput}
           value={value}
           placeholder="Введите сообщение..."
           fullWidth={true}
+          className={styles.stiled_input}
           endAdornment={
             <InputAdornment position="end">
-              {value && <Send className={styles.icon} onClick={() => this.sendMessage({author: "User", value})}/>}
+              {value && <Send className={styles.icon} onClick={() => this.sendMessage({ author: "User", value })} />}
             </InputAdornment>
           }
         />

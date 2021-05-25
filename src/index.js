@@ -1,17 +1,12 @@
 import { ThemeProvider, createMuiTheme } from "@material-ui/core"
 import React from 'react';
 import ReactDom from 'react-dom';
-import { MessageField, ChatList } from "./components"
+import { Layout } from "./components"
 
 
 const App = () => {
   return (
-    // @TODO сделать Layout
-    <div style={{display: "flex"}}>
-      <ChatList/>
-      <hr/>
-      <MessageField />
-    </div>
+    <Layout/>
   )
 }
 

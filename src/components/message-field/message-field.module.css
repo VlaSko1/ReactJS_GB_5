@@ -1,4 +1,26 @@
+
 .icon {
-    color: #2b5278;
-    cursor: pointer;
+  color: #2b5278;
+  cursor: pointer;
+}
+.stiled_input {
+  box-sizing: border-box;
+  background-color: #b0e0e6;
+  outline: none;
+  height: 5vh;
+  min-height: 40px;
+}
+.message__field {
+  width: 85%;
+  background-color: #FFFAFA;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  height: 90vh;
+
+}
+.message__list {
+  height: 95%;
+  max-height: 95%;
+  overflow-y: auto;
 }
