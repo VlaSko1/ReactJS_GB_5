@@ -12,9 +12,6 @@ const StyledInput = withStyles((theme) => ({
       padding: '10px 15px',
       fontSize: "15px",
       height: "5vh"
-
-
-
     }
   }
 }))(Input)
