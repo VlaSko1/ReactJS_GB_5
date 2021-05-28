@@ -7,19 +7,22 @@ export class Header extends React.Component {
   render() {
     return (
       <header>
-        <h1 className="header_h1">Telegraf</h1>
+        <a href="/"><h1 className="header_h1">Telegraf</h1></a>
         <h3 className="header_h3">Только лучшие и самые популярные чаты</h3>
-        <ul>
-          <li>
-            <Link to="/">home</Link>
+        <ul className="menu">
+          <li className="menu__link">
+            <Link to="/">Home</Link>
           </li>
-          <li>
-            <Link to="/about">about</Link>
+          <li className="menu__link">
+            <Link to="/profile">Profile</Link>
           </li>
-          <li>
-            <Link to="/topics">topics</Link>
+          <li className="menu__link">
+            <Link to="/chat/room1">room1</Link>
           </li>
-          <li>
+          <li className="menu__link">
+            <Link to="/chat/room2">room2</Link>
+          </li>
+          <li className="menu__link">
             <Link to="/404">404</Link>
           </li>
         </ul>

@@ -1,0 +1,21 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.profile-page-main{
+    background-color: rgb(175, 174, 174);
+    height: 90vh;
+    
+}
+
+.profile-page-main h1 {
+    text-align: center;
+    padding-top: 50px;
+    
+}
+.profile-page-main p {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 16px;
+}

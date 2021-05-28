@@ -1,0 +1,20 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.home-page-main{
+    background-color: rgb(175, 174, 174);
+    height: 90vh;
+    
+}
+
+.home-page-main h1 {
+    text-align: center;
+    padding-top: 50px;
+    
+}
+.home-page-main p {
+    text-align: center;
+    margin-top: 50px;
+}

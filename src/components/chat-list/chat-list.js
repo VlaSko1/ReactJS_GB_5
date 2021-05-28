@@ -21,11 +21,19 @@ const StyledList = withStyles({
 export class ChatList extends React.Component {
   // TODO сделать propTypes
   static propTypes = {
+    chats: PropTypes.arrayOf(PropTypes.shape({
+      title: PropTypes.string,
+      value: PropTypes.string
+    }))
+  }
+  constructor(props) {
+    super(props)
+    console.log(props)
 
   }
   state = {
     chats: ["room1", "room2", "room3"],
-    selectedIndex: 0,
+    selectedIndex: null,
   }
   render() {
     const { chats, selectedIndex } = this.state
