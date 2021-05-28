@@ -19,7 +19,7 @@ const StyledList = withStyles({
 })(List);
 
 export class ChatList extends React.Component {
-  // TODO сделать propTypes
+  
   static propTypes = {
     chats: PropTypes.arrayOf(PropTypes.shape({
       title: PropTypes.string,
@@ -31,17 +31,14 @@ export class ChatList extends React.Component {
     console.log(props)
 
   }
-  state = {
-    chats: ["room1", "room2", "room3"],
-    selectedIndex: null,
-  }
+  
   render() {
-    const { chats, selectedIndex } = this.state
+    
     return (
       <StyledList>
-        {chats.map((chat, index) => (
+        {this.props.chats.map((chat, index) => (
           // TODO доделать Chat
-          <Chat title={chat} key={index} selected={selectedIndex}/>
+          <Chat title={chat.title} key={index} />/*selected={selectedIndex}*/
         ))}
       </StyledList>
     )

@@ -21,7 +21,7 @@ export class Layout extends React.Component {
             <MessageProvider {...params}>
               {(state, actions) => (
                 <div className="layout">
-                  {console.log(state, actions)}
+                  {console.log(state, actions, params.match.url)}
                   <Header />
                   <div className="main">
                     {/* сюда передать данные из state */}
