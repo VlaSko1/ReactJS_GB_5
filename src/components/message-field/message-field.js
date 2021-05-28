@@ -1,7 +1,7 @@
 import { Input, InputAdornment, withStyles } from '@material-ui/core';
 import { Send } from '@material-ui/icons';
 import React from 'react'
-import { Message } from "../message"
+import { Message } from "./message"
 
 import styles from './message-field.module.css'
 

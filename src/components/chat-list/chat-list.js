@@ -1,7 +1,7 @@
 import { List, withStyles } from '@material-ui/core';
 import PropTypes from "prop-types"
 import React from 'react'
-import { Chat } from '../chat'
+import { Chat } from './chat'
 
 
 const StyledList = withStyles({
