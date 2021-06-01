@@ -1,6 +1,6 @@
 import { List, withStyles } from '@material-ui/core';
-import PropTypes from "prop-types"
 import React from 'react'
+import { Link } from "react-router-dom"
 import { Chat } from './chat'
 
 
@@ -15,31 +15,35 @@ const StyledList = withStyles({
     lineHeight: "30px",
     boxSizing: "border-box"
   },
-  
+
 })(List);
 
 export class ChatList extends React.Component {
-  
-  static propTypes = {
-    chats: PropTypes.arrayOf(PropTypes.shape({
-      title: PropTypes.string,
-      value: PropTypes.string
-    }))
-  }
-  constructor(props) {
-    super(props)
-    console.log(props)
-
-  }
-  
   render() {
     
+    const {
+      "0": {conversations},
+      "0": {allMessages},
+      match: { params },
+    } = this.props
+
+    const chatId = params.roomId
+
     return (
-      <StyledList>
-        {this.props.chats.map((chat, index) => (
-          // TODO доделать Chat
-          <Chat title={chat.title} key={index} />/*selected={selectedIndex}*/
-        ))}
+      <StyledList >
+        {conversations.map((chat) => {
+          const currentMessage = allMessages[chat.title]
+
+          return (
+            <Link key={chat.title} to={`/chat/${chat.title}`}>
+              <Chat 
+                selected={chat.title === chatId}
+                chat={chat}
+                lastMessage={currentMessage[currentMessage.length - 1]}
+              />
+            </Link>
+          )
+        })}
       </StyledList>
     )
   }

@@ -1,14 +1,51 @@
+
+import {
+  ListItem,
+  withStyles,
+} from "@material-ui/core"
+import PropTypes from "prop-types"
 import React from 'react'
 
-export class Chat extends React.Component {
-  // TODO сделать propTypes
-  render() {
-    const { title, handleListItemClick, selected } = this.props
 
-    // TODO handleListItemClick нужен для <ListItem handleListItemClick selected/> (из материал)
+const StyledListItem = withStyles(() => ({
+  root: {
+    "&.Mui-selected": {
+      backgroundColor: "#2b5278",
+      borderRadius: "20px"
+    },
+    "&.Mui-selected:hover": {
+      backgroundColor: "#2b5278",
+    },
+  },
+}))(ListItem)
+
+
+export class Chat extends React.Component {
+  static propTypes = {
+    selected: PropTypes.bool.isRequired,
+    chat: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      value: PropTypes.string
+    }),
+    lastMessage: PropTypes.shape({
+      author: PropTypes.string.isRequired,
+      message: PropTypes.string,
+      date: PropTypes.date,
+    }),
+  }
+
+
+  render() {
+    const { selected, chat, lastMessage } = this.props
+    const { title } = chat
+
 
     return (
-      <div>{title}</div>
+      <StyledListItem 
+        selected={selected}
+      >
+        {title}
+      </StyledListItem>
     )
   }
 }

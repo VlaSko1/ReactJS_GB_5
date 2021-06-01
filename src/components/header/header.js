@@ -17,10 +17,7 @@ export class Header extends React.Component {
             <Link to="/profile">Profile</Link>
           </li>
           <li className="menu__link">
-            <Link to="/chat/room1">room1</Link>
-          </li>
-          <li className="menu__link">
-            <Link to="/chat/room2">room2</Link>
+            <Link to="/chat">Chat</Link>
           </li>
           <li className="menu__link">
             <Link to="/404">404</Link>

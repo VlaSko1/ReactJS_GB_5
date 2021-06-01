@@ -1,5 +1,6 @@
 import React from "react";
 
+
 export class MessageProvider extends React.Component {
   state = {
     conversations: [
@@ -19,10 +20,9 @@ export class MessageProvider extends React.Component {
     const {
       target: {value}
     } = event // Это ивент инпута
-   
 
     this.setState({
-      conversations: this.conversations.map( conversation => {
+      conversations: this.state.conversations.map( conversation => {
         if (params.roomId === conversation.title) {
           return {...conversation, value}
         }
@@ -37,7 +37,7 @@ export class MessageProvider extends React.Component {
       return
     }
 
-    const { messages } = this.state
+    const { messages, conversations } = this.state
     const { match } = this.props
     const { params } = match  // :roomId передаем в Route
 
@@ -46,13 +46,39 @@ export class MessageProvider extends React.Component {
     this.setState({
       messages: {
         ...messages,
-        [params.roomId]: [...(messages[params.roomId] || []), newMessage]
-      }
+        [params.roomId]: [...(messages[params.roomId] || []), newMessage],
+      },
+      conversations: conversations.map((conversation) =>
+        conversation.title === params.roomId
+          ? {
+            ...conversation,
+            value: "",
+          }
+          : conversation,
+      ),
     })
   }
 
-  componentDidUpdate() {
-    // TODO добавь сюда ответ бота (перенеси из компонента message-field кажется инемного переделать)
+  componentDidUpdate(_, prevState) {
+    const {
+      match: { params },
+    } = this.props
+    const { messages } = this.state
+
+    if (!params.roomId) {
+      return
+    }
+
+    const currentMessages = messages[params.roomId]
+    const prevMessages = prevState.messages[params.roomId]
+
+    const lastMessage = currentMessages[currentMessages.length - 1]
+
+    if (lastMessage?.author !== "Bot" && currentMessages !== prevMessages) {
+      setTimeout(() => {
+        this.sendMessage({ author: "Bot", message: "Как дела ?" })
+      }, 500)
+    }
   }
 
   render() {
@@ -62,10 +88,13 @@ export class MessageProvider extends React.Component {
     const {conversations, messages} = this.state
 
     const state = {
-      conversations, // их будет использовать ChatList, то есть эти конверсешены мы передаем в чат листи и там их мапаем
-      messages: messages[params.roomId] || [], // roomId это id текущей комнаты
-      value: conversations.find((conversation) => conversation.title === params.roomId)?.value || '',
-        
+      conversations, // их будет использовать ChatList[]
+      allMessages: messages,
+      messages: messages[params.roomId] || [], // roomId это id текущей комнаты,=
+      value:
+        conversations.find(
+          (conversation) => conversation.title === params.roomId,
+        )?.value || "",
     }
     
 

@@ -16,17 +16,33 @@ export class Layout extends React.Component {
     return (
 
       <Switch>
-        <Route path={["/chat/:roomId"]}>
+        <Route path="/chat/:roomId">
           {(params) => (
             <MessageProvider {...params}>
               {(state, actions) => (
                 <div className="layout">
-                  {console.log(state, actions, params.match.url)}
                   <Header />
                   <div className="main">
                     {/* сюда передать данные из state */}
-                    <ChatList chats={[...state[0].conversations]}/>
-                    <MessageField />
+                    <ChatList {...params} {...state}/>
+                    <MessageField {...state} {...actions}/>
+                  </div>
+                </div>
+              )}
+            </MessageProvider>
+          )}
+        </Route>
+        <Route path="/chat">
+          {(params) => (
+            <MessageProvider {...params}>
+              {(state, actions) => (
+                <div className="layout">
+                  
+                  <Header />
+                  <div className="main">
+                    {/* сюда передать данные из state */}
+                    <ChatList {...params} {...state} />
+                    <MessageField {...state} {...actions} />
                   </div>
                 </div>
               )}

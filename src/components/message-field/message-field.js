@@ -1,5 +1,6 @@
 import { Input, InputAdornment, withStyles } from '@material-ui/core';
 import { Send } from '@material-ui/icons';
+import PropTypes from "prop-types";
 import React from 'react'
 import { Message } from "./message"
 
@@ -17,59 +18,33 @@ const StyledInput = withStyles((theme) => ({
 }))(Input)
 
 export class MessageField extends React.Component {
-  state = {
-    messages: [{ author: "User", value: "Привет!", date: new Date() }],
-    value: '',
+  handleChangeInput = (e) => {
+    this.props[1].handleChangeValue(e)
   }
 
+  handleSendMessage = () => {
+    const { sendMessage } = this.props[1]
 
-  componentDidUpdate(prevProps, prevState) {
-    const { messages } = this.state
+    const { value } = this.props[0]
 
-    const lastMessage = messages[messages.length - 1]
-
-    if (lastMessage.author === "User" && prevState.messages !== messages) {
-      setTimeout(() => {
-        this.setState({
-          messages: [...messages,
-          { author: "Bot", value: "как дела?", date: new Date() }
-          ],
-        })
-      }, 500)
-    }
-  }
-
-  sendMessage = ({ author, value }) => {
-    const { messages } = this.state
-
-    this.setState({
-      messages: [...messages, { author, value, date: new Date() }],
-      value: '',
-    })
-  }
-
-  handleChangeInput = ({ target }) => {
-    this.setState({
-      value: target.value,
-    })
+    sendMessage({ author: "User", message: value })
   }
 
   handlePressInput = ({ charCode }) => {
-    const { value } = this.state
 
     if (charCode === 13) {
-      this.sendMessage({ author: "User", value })
+      this.handleSendMessage()
     }
   }
 
 
   render() {
-    const { messages, value } = this.state;
-
+    const { messages } = this.props[0];
+    const { value } = this.props[0];
     return (
       <div className={styles.message__field}>
         <div className={styles.message__list}>
-          {messages.map((message, index) => (
+          {messages?.map((message, index) => (
             <Message message={message} key={index} />
           ))}
         </div>
@@ -82,7 +57,7 @@ export class MessageField extends React.Component {
           className={styles.stiled_input}
           endAdornment={
             <InputAdornment position="end">
-              {value && <Send className={styles.icon} onClick={() => this.sendMessage({ author: "User", value })} />}
+              {value && <Send className={styles.icon} onClick={() => this.handleSendMessage({ author: "User", value })} />}
             </InputAdornment>
           }
         />

@@ -11,12 +11,12 @@ export class Message extends React.Component {
     }),
   }
   render() {
+    
     const { message } = this.props
-    const { author, value, date } = message 
+    const { author, message: value, date } = message
     return (
       <div>
-        <h3><span>{author}: </span>{value}</h3>
-        <hr/>
+        <p className="message"><span>{author}: </span>{value}</p>
       </div>
     )
   }
