@@ -51,7 +51,7 @@ export class Layout extends React.Component {
         </Route>
         <Route exact path="/" render={() => (<HomePage/>)} />
         
-        <Route exact path="/profile" render={() => ({ProfilePage})} />
+        <Route exact path="/profile" render={() => <ProfilePage/>} />
         <Route render={() => (<div><Header /><h3 className="not_found">Not found</h3></div>)} />
       </Switch>
 

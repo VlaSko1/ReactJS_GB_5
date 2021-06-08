@@ -6,10 +6,9 @@ import './profile-page.css'
 
 
 
-class ProfilePage1 extends React.Component {
+class ProfilePageView extends React.Component {
   render() {
-    const {showName, name } = this.props
-    
+    const {showName, name, checkProfile } = this.props
     return (
       <>
         <Header />
@@ -37,4 +36,4 @@ const mapDispatchToProps = (dispatch) => {
     checkProfile: () => dispatch(checkProfile()),
   }
 }
-export const ProfilePage =  connect(mapStateToProps, mapDispatchToProps)(ProfilePage1);
+export const ProfilePage = connect(mapStateToProps, mapDispatchToProps)(ProfilePageView);
