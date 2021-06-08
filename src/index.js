@@ -1,13 +1,15 @@
 import { ThemeProvider, createMuiTheme } from "@material-ui/core"
 import React from 'react';
 import ReactDom from 'react-dom';
+import { connect, Provider, useSelector, shallowEqual } from "react-redux";
 import { BrowserRouter } from 'react-router-dom'
 import { Layout } from "./components"
+import { store } from "./store"
 
 
 const App = () => {
   return (
-    <Layout/>
+    <Layout />
   )
 }
 
@@ -16,7 +18,9 @@ const theme = createMuiTheme({})
 ReactDom.render(
   <BrowserRouter>
     <ThemeProvider theme={theme}>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </ThemeProvider>
   </BrowserRouter>,
   document.getElementById("root"));
