@@ -12,7 +12,7 @@ export class MessageProvider extends React.Component {
       room2: [{ author: "User", message: "Привет room2!", date: new Date() }],
     },
   }
-
+  // action в store/conversations
   handleChangeValue = (event) => {
     const { match } = this.props
     const { params } = match // :roomId передаем в Route
@@ -21,6 +21,7 @@ export class MessageProvider extends React.Component {
       target: {value}
     } = event // Это ивент инпута
 
+    // логику обновлений перенести в reducer
     this.setState({
       conversations: this.state.conversations.map( conversation => {
         if (params.roomId === conversation.title) {
@@ -31,7 +32,7 @@ export class MessageProvider extends React.Component {
       }),
     })
   }
-
+// action в store/messages
   sendMessage = ({author, message}) => {
     if (!message) {
       return
