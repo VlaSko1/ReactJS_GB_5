@@ -1,0 +1,1 @@
+export const CHANG_VALUE = "@convestations/chang_value";
