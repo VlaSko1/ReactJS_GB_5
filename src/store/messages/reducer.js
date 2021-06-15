@@ -6,7 +6,7 @@ const initialState = {
     room2: [{ author: "User", message: "Привет room2! Redux", date: new Date() }],
   },
 }
-export function conversationsReducer(state = initialState, action) {
+export function messagesReducer(state = initialState, action) {
   switch (action.type) {
     /*case CHECK_PROFILE:
       return {

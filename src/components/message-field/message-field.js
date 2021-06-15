@@ -1,6 +1,8 @@
 import { Input, InputAdornment, withStyles } from '@material-ui/core';
 import { Send } from '@material-ui/icons';
 import React from 'react'
+import { connect } from 'react-redux'
+import { changValue } from "../../store/conversations"
 import { Message } from "./message"
 
 import styles from './message-field.module.css'
@@ -16,9 +18,9 @@ const StyledInput = withStyles((theme) => ({
   }
 }))(Input)
 
-export class MessageField extends React.Component {
+class MessageFieldView extends React.Component {
   // action в store/conversations
-  handleChangeInput = (e) => {
+  /*handleChangeInput = (e) => {
     this.props[1].handleChangeValue(e)
   }
 
@@ -28,7 +30,7 @@ export class MessageField extends React.Component {
     const { value } = this.props[0]
 
     sendMessage({ author: "User", message: value })
-  }
+  }*/
 
   handlePressInput = ({ charCode }) => {
 
@@ -39,8 +41,10 @@ export class MessageField extends React.Component {
 
 
   render() {
-    const { messages } = this.props[0];
-    const { value } = this.props[0];
+    console.log(this.props); return;
+    const { messages } = this.props.messages; // возможно нужно добавить [0] 
+    const { value } = this.props.conversations; // возможно нужно добавить [0] 
+    const { changValue } = this.props.changValue
     return (
       <div className={styles.message__field}>
         <div className={styles.message__list}>
@@ -49,7 +53,7 @@ export class MessageField extends React.Component {
           ))}
         </div>
         <StyledInput
-          onChange={this.handleChangeInput}
+          onChange={changValue}
           onKeyPress={this.handlePressInput}
           value={value}
           placeholder="Введите сообщение..."
@@ -65,3 +69,18 @@ export class MessageField extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state, props) => {
+
+  return {
+    conversations: state.conversationsReducer.conversations,
+    messages: state.messagesReducer.messages
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changValue: (e) => dispatch(changValue(e)),
+  }
+}
+
+export const MessageField = connect(mapStateToProps, mapDispatchToProps)(MessageFieldView);

@@ -24,23 +24,6 @@ export class Layout extends React.Component {
                   <Header />
                   <div className="main">
                     {/* сюда передать данные из state */}
-                    <ChatList {...params} {...state}/>
-                    <MessageField {...state} {...actions}/>
-                  </div>
-                </div>
-              )}
-            </MessageProvider>
-          )}
-        </Route>
-        <Route path="/chat">
-          {(params) => (
-            <MessageProvider {...params}>
-              {(state, actions) => (
-                <div className="layout">
-                  
-                  <Header />
-                  <div className="main">
-                    {/* сюда передать данные из state */}
                     <ChatList {...params} {...state} />
                     <MessageField {...state} {...actions} />
                   </div>
@@ -49,9 +32,25 @@ export class Layout extends React.Component {
             </MessageProvider>
           )}
         </Route>
-        <Route exact path="/" render={() => (<HomePage/>)} />
-        
-        <Route exact path="/profile" render={() => <ProfilePage/>} />
+        <Route path="/chat">
+          {(params) => (
+
+            <div className="layout">
+
+              <Header />
+              <div className="main">
+                {/* сюда передать данные из state */}
+                <ChatList {...params} />
+                <MessageField  {...params} />
+              </div>
+            </div>
+          )}
+
+
+        </Route>
+        <Route exact path="/" render={() => (<HomePage />)} />
+
+        <Route exact path="/profile" render={() => <ProfilePage />} />
         <Route render={() => (<div><Header /><h3 className="not_found">Not found</h3></div>)} />
       </Switch>
 

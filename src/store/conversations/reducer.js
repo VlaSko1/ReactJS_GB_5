@@ -10,10 +10,23 @@ const initialState = {
 export function conversationsReducer(state = initialState, action) {
   switch (action.type) {
     case CHANG_VALUE:
+      {
+      const { e, params } = action.payload
+      const {
+        target: { value }
+      } = e
+
       return {
         ...state,
-        showName: !state.showName,
+        conversations: state.conversations.map(conversation => {
+          if (params.roomId === conversation.title) {
+            return { ...conversation, value }
+          }
+
+          return conversation
+        }),
       }
+    }
     default:
       return state;
   }
